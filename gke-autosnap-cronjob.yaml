@@ -1,4 +1,4 @@
-apiVersion: batch/v1beta1
+apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: gke-auto-snapshot
@@ -17,5 +17,14 @@ spec:
         spec:
           containers:
           - name: gke-auto-snapshot
-            image: prodatakey/gke-auto-snapshot:0.2.0
+            image: blueasni/auto-snapshot:latest
+            resources:
+              limits:
+                cpu: 100m
+                ephemeral-storage: 1Gi
+                memory: 1Gi
+              requests:
+                cpu: 100m
+                ephemeral-storage: 1Gi
+                memory: 1Gi
           restartPolicy: OnFailure
